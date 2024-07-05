@@ -1,4 +1,39 @@
-<x-guest-layout>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <style type="text/css">
+            #bg{
+                background: url("{{ asset('assets/media/banner2.jpg') }}");
+                object-fit: cover;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container-fluid m-0 p-0">
+            <div class="row m-0 p-0 d-flex justify-content-center align-items-center" id="bg">
+                <!-- <div class="col-md-6 m-0 p-0" style="min-height: 100%;"> -->
+                    <!-- <img src="{{ asset('assets/media/banner.jpg') }}" class="img-fluid"> -->
+                <!-- </div> -->
+                <div class="col-md-5 py-5 m-0">
+                    <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
@@ -58,3 +93,13 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+
+
