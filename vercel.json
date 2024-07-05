@@ -1,22 +1,3 @@
-Follow these steps
-
-create a folder called api
-Inside the folder, create a file called index.php
-In the index.php file write the following.
-<?php  require __DIR__ . '/../public/index.php';
-
-In the root directory, create a file called .vercelignore.
-
-In the file created, write the following:
-
-/vendor
-
-Create an empty folder named dist
-
-Create a file called vercel.json
-
-In the file created write the following
-
 {
 
 {"version": 2,
