@@ -1,9 +1,0 @@
-node_modules
-tests
-.env
-.git
-.github
-.gitignore
-.gitattributes
-README.md
-.vscode

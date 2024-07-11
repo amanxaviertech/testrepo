@@ -11,4 +11,4 @@ composer install --no-dev --optimize-autoloader --prefer-dist
 apt-get clean
 
 # Proceed with the standard Vercel build process
-vercel build
+# vercel build
