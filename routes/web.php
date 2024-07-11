@@ -15,8 +15,11 @@ Route::group(['prefix' => 'admin'], function () {
     require __DIR__.'/admin.php';
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+// Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 
