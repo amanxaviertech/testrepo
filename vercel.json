@@ -23,7 +23,7 @@
             "src": "api/index.php",
             "use": "vercel-php@0.6.1",
             "config": {
-                "buildCommand": "bash .vercel_build.sh"
+                "buildCommand": "bash .vercel_build.sh && php artisan migrate --force"
             }
         }
     ]
