@@ -6,6 +6,19 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ImageController;
+use Illuminate\Support\Facades\DB;
+
+Route::get('/', function () {
+    try {
+        DB::connection()->getPdo();
+        $dbStatus = "Database connection is established.";
+    } catch (\Exception $e) {
+        $dbStatus = "Could not connect to the database. Please check your configuration.";
+    }
+
+    return view('welcome', ['dbStatus' => $dbStatus]);
+});
+
 
 Route::get('/images/{filename}', [ImageController::class, 'serveWebp']);
 
@@ -17,9 +30,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 // Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
