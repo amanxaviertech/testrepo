@@ -15,7 +15,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-           <h1>Laravel CMS</h1>
+           <h1 class="text-success p-3">Laravel CMS</h1>
         </div>
     </nav>
 
