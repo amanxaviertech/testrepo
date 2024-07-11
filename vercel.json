@@ -6,7 +6,7 @@
     }],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false", 
         "APP_URL": "https://yourprojectdomain.com",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
@@ -21,9 +21,9 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "vercel-php@0.6.0",
+            "use": "@vercel/php",
             "config": {
-            "buildCommand": "bash .vercel_build.sh"
+                "buildCommand": "bash .vercel_build.sh"
             }
         }
     ]
