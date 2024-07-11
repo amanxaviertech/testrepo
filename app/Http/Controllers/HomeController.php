@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function show($slug)
     {
-        // dd($slug);
+        dd($slug);
         $user = Auth::user();
         $pages = Page::where('active', 1)->get(); 
         if($slug){
