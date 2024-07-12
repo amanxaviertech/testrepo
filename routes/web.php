@@ -45,13 +45,27 @@ Route::get('/check-db-connection', function () {
 
 Route::get('/', function () {
     try {
-        DB::connection()->getPdo();
-        $dbStatus = "Database connection is established.";
-    } catch (\Exception $e) {
-        $dbStatus = "Could not connect to the database. Please check your configuration.";
-    }
+        // Attempt to connect to the database
+        $connection = DB::connection()->getPdo();
+        $tables = DB::select('SHOW TABLES');
 
-    return view('welcome', ['dbStatus' => $dbStatus]);
+        if (empty($tables)) {
+            throw new \Exception('No tables found in the database.');
+        }
+
+        $databaseDetails = [];
+        foreach ($tables as $table) {
+            $tableName = array_values((array)$table)[0];
+            $data = DB::table($tableName)->get();
+            $databaseDetails[$tableName] = $data;
+        }
+
+        return view('welcome', ['databaseDetails' => $databaseDetails]);
+
+    } catch (\Exception $e) {
+        $errorMessage = $e->getMessage();
+        return view('welcome', ['error' => "Could not connect to the database: $errorMessage"]);
+    }
 });
 
 
