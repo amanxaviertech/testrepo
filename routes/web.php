@@ -8,11 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\DB;
 
+
 Route::get('/database-details', function () {
     try {
         // Attempt to connect to the database
-        $connection = DB::connection()->getPdo();
-        $tables = DB::select('SHOW TABLES');
+        DB::connection()->getPdo();
+
+        // Fetch tables for PostgreSQL
+        $tables = DB::select("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'");
 
         if (empty($tables)) {
             throw new \Exception('No tables found in the database.');
@@ -20,7 +23,7 @@ Route::get('/database-details', function () {
 
         $databaseDetails = [];
         foreach ($tables as $table) {
-            $tableName = array_values((array)$table)[0];
+            $tableName = $table->table_name;
             $data = DB::table($tableName)->get();
             $databaseDetails[$tableName] = $data;
         }
@@ -32,6 +35,7 @@ Route::get('/database-details', function () {
         return view('database-details', ['error' => "Could not connect to the database: $errorMessage"]);
     }
 });
+
 
 Route::get('/check-db-connection', function () {
     try {
