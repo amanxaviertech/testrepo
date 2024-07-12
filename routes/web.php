@@ -8,6 +8,25 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\DB;
 
+Route::get('/database-details', function () {
+    try {
+        $connection = DB::connection()->getPdo();
+        $tables = DB::select('SHOW TABLES');
+        $databaseDetails = [];
+
+        foreach ($tables as $table) {
+            $tableName = array_values((array)$table)[0];
+            $data = DB::table($tableName)->get();
+            $databaseDetails[$tableName] = $data;
+        }
+
+        return view('database-details', ['databaseDetails' => $databaseDetails]);
+    } catch (\Exception $e) {
+        return view('database-details', ['error' => 'Could not connect to the database. Please check your configuration.']);
+    }
+});
+
+
 Route::get('/', function () {
     try {
         DB::connection()->getPdo();
@@ -18,6 +37,8 @@ Route::get('/', function () {
 
     return view('welcome', ['dbStatus' => $dbStatus]);
 });
+
+
 
 
 Route::get('/images/{filename}', [ImageController::class, 'serveWebp']);
