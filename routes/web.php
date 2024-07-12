@@ -10,10 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/database-details', function () {
     try {
+        // Attempt to connect to the database
         $connection = DB::connection()->getPdo();
         $tables = DB::select('SHOW TABLES');
-        $databaseDetails = [];
 
+        if (empty($tables)) {
+            throw new \Exception('No tables found in the database.');
+        }
+
+        $databaseDetails = [];
         foreach ($tables as $table) {
             $tableName = array_values((array)$table)[0];
             $data = DB::table($tableName)->get();
@@ -21,8 +26,19 @@ Route::get('/database-details', function () {
         }
 
         return view('database-details', ['databaseDetails' => $databaseDetails]);
+
     } catch (\Exception $e) {
-        return view('database-details', ['error' => 'Could not connect to the database. Please check your configuration.']);
+        $errorMessage = $e->getMessage();
+        return view('database-details', ['error' => "Could not connect to the database: $errorMessage"]);
+    }
+});
+
+Route::get('/check-db-connection', function () {
+    try {
+        DB::connection()->getPdo();
+        return response()->json(['message' => 'Database connection is established.'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Could not connect to the database: ' . $e->getMessage()], 500);
     }
 });
 
