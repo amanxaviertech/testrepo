@@ -47,30 +47,6 @@
         {!! $singlepage->htmlContent !!} <!-- Render HTML content from database -->
     </div>
     <style>{!! $singlepage->cssContent !!}</style>
-      <script>
-$(document).ready(function() {
-    $('#ajaxForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = new FormData(this);
-
-        $.ajax({
-            type: 'POST',
-            url: $(this).attr('action'),
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                alert(response.message);
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('An error occurred: ' + xhr.responseText);
-            }
-        });
-    });
-});
-</script>
 </body>
 </html>
 
