@@ -457,6 +457,11 @@ class Browsershot
         return $this->setOption('disableImages', true);
     }
 
+    public function disableCaptureURLS(): static
+    {
+        return $this->setOption('disableCaptureURLS', true);
+    }
+
     public function blockUrls($array): static
     {
         return $this->setOption('blockUrls', $array);
@@ -1045,7 +1050,11 @@ class Browsershot
         $this->chromiumResult = new ChromiumResult(json_decode($rawOutput, true));
 
         if ($process->isSuccessful()) {
-            return $this->chromiumResult?->getResult();
+            $result = $this->chromiumResult?->getResult();
+
+            $this->cleanupTemporaryOptionsFile();
+
+            return $result;
         }
 
         $this->cleanupTemporaryOptionsFile();
